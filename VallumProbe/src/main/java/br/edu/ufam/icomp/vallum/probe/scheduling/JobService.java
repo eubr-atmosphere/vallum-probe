@@ -20,14 +20,13 @@ public class JobService
 	ProbeService probeService;
 		
 	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })
 	public Double responseTimeDB()
 	{	
 		Double result = probeService.getResponseTimeDB();
 				
 		try 
 		{
-			BackgroundClient client = new BackgroundClient();
+			BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -40,6 +39,8 @@ public class JobService
 			message.setResourceId(45001); //MariaDB
 			
 			message.addData(new Data(Data.Type.MEASUREMENT, 45001, new Observation(System.currentTimeMillis(), result)));
+			
+			LOGGER.info("Message {}!", message.toString());
 			
 			client.send(message);
 			
@@ -58,14 +59,13 @@ public class JobService
 	}
 	
 	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })
 	public Double responseTimeFile()
 	{				
         Double result = probeService.getResponseTimeFile();
 		
         try 
 		{
-			BackgroundClient client = new BackgroundClient();
+        	BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -96,14 +96,13 @@ public class JobService
 	}
 	
 	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })
 	public Double getThroughputDB()	
 	{	
 		Double result = probeService.getThroughputDB();
 		
 		try 
 		{
-			BackgroundClient client = new BackgroundClient();
+			BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -134,14 +133,13 @@ public class JobService
 	}
 	
 	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })	
 	public Double getThroughputFile()	
 	{
 		Double result = probeService.getThroughputFile();
 		
 		try 
 		{
-			BackgroundClient client = new BackgroundClient();
+			BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -171,15 +169,14 @@ public class JobService
 		return result;
 	}
 	
-	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })	
+	@Scheduled(cron="0 0 0/1 * * *")	
 	public Double getBandwidthDB()	
 	{
 		Double result = probeService.getbandwidthDB();
 		
 		try 
 		{
-			BackgroundClient client = new BackgroundClient();
+			BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -210,14 +207,13 @@ public class JobService
 	}
 		
 	@Scheduled(cron="0 0 0/1 * * *")
-	@SuppressWarnings({ "unused", "null" })
 	public Double getBandwidthFile()	
 	{
 		Double result = probeService.getbandwidthFile();
 		
 		try 
 		{
-			BackgroundClient client = new BackgroundClient();
+			BackgroundClient client = new BackgroundClient("https://150.165.15.41:32025/monitor");
 			
 			client.authenticate(45001, "pass".getBytes());
 			
@@ -245,6 +241,5 @@ public class JobService
         } 		
 				
 		return result;
-	}
-	
+	}	
 }
