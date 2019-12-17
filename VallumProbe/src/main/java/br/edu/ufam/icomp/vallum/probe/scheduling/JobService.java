@@ -1,5 +1,7 @@
 package br.edu.ufam.icomp.vallum.probe.scheduling;
 
+import java.time.Instant;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class JobService
 {	
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobService.class);
 	
-	private int messageId = 0;
+	private static int messageId = 0;
 	
 	@Autowired
 	ProbeService probeService;
@@ -39,9 +41,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45001); //MariaDB
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45001, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45001, new Observation(Instant.now().getEpochSecond(), result)));
 						
 			LOGGER.info("Message {}!", message.toString());
 			
@@ -79,9 +81,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45002); //File
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45002, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45002, new Observation(Instant.now().getEpochSecond(), result)));
 			
 			client.send(message);
 			
@@ -117,9 +119,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45001); //MariaDB
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45003, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45003, new Observation(Instant.now().getEpochSecond(), result)));
 			
 			client.send(message);
 			
@@ -155,9 +157,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45002); //File
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45004, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45004, new Observation(Instant.now().getEpochSecond(), result)));
 			
 			client.send(message);
 			
@@ -193,9 +195,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45001); //MariaDB
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45005, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45005, new Observation(Instant.now().getEpochSecond(), result)));
 			
 			client.send(message);
 			
@@ -231,9 +233,9 @@ public class JobService
 			
 			message = client.createMessage();
 			message.setResourceId(45002); //File
-			message.setSentTime(System.currentTimeMillis());
+			message.setSentTime(Instant.now().getEpochSecond());
 			message.setMessageId(messageId+1);
-			message.addData(new Data(Data.Type.MEASUREMENT, 45005, new Observation(System.currentTimeMillis(), result)));
+			message.addData(new Data(Data.Type.MEASUREMENT, 45005, new Observation(Instant.now().getEpochSecond(), result)));
 			
 			client.send(message);
 			
